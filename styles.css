@@ -1,0 +1,15 @@
+button {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    color: white;
+    font-family:'top secret stamp';
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: red;
+    text-decoration: underline;
+}
