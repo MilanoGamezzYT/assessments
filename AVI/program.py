@@ -20,7 +20,7 @@ calculateInput = tk.Text(root, width = 70, height = 30, background='lightgrey') 
 calculateButton = ttk.Button(root, text='Bereken score(s)', command=calculate)        # generate button when pressed -> calculate
 characterLabel = tk.Label(root, text=f'Karakters:', width=20, bg='black', fg='white') # generate characterLabel
 sentencesLabel = tk.Label(root, text=f'Zinnen:', width=20, bg='black', fg='white')   # generate sentencesLabel
-WordsLabel = tk.Label(root, text=f'Woorden:', width=20, bg='black', fg='white')
+WordsLabel = tk.Label(root, text=f'Woorden:', width=20, bg='black', fg='white')      # generate WordsLabel
 AVIScoreLabel = tk.Label(root, text=f'AVI Score:', width=20, bg='black', fg='white')  # generate AVIScoreLabel
 
 calculateInput.place(x=20, y=20)   # place is one of the ways to put elements on root (window).
