@@ -1,3 +1,4 @@
+import math
 EASY_TEXT = """Ik hou van programmeren. Programmeren is leuk. 
 Ik kan veel dingen maken met programmeren. Ik kan een website maken. 
 Ik kan een spel maken. Ik kan een chatbot maken. 
@@ -56,8 +57,22 @@ def getNumberOfWords(text: str) -> int:
     return teller2 + 1
 
 # opdracht 5
-AVIScore = 0
-def getAverageAVI(text: str) -> float:
-    global AVIScore
-    AVIScore = getNumberOfWords(text) / getNumberOfSentences(text)
+def getAverageAVI(text: str ) -> int:
+    words = getNumberOfWords(text)
+    sentences = getNumberOfSentences(text)
+
+    gemiddelde = round(words / sentences)
+
+    if gemiddelde <= 7:
+        AVIScore = 5
+    elif gemiddelde == 8:
+        AVIScore = 6
+    elif gemiddelde == 9:
+        AVIScore = 7
+    elif gemiddelde == 10:
+        AVIScore = 8
+    elif gemiddelde == 11:
+        AVIScore = 11
+    elif gemiddelde > 11:
+        AVIScore = 12
     return AVIScore
