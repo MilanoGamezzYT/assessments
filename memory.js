@@ -11,7 +11,9 @@ var images = [
     "pictures/Devries.png"
   ];
   
-  var numCards = 10;
+  images = images.concat(images);
+  
+  var numCards = 20;
   
   var flippedCards = 0;
   
@@ -30,6 +32,8 @@ var images = [
   restartButton.addEventListener("click", restart);
   
   createCards();
+  
+  var score = 0;
   
   function createCards() {
     images = shuffleArray(images);
@@ -57,7 +61,7 @@ var images = [
   }
   
   function flipCard(event) {
-    var card = event.target;
+    var card = event.target.parentElement;
     if (!card.classList.contains("flipped") && flipped.length < 2) {
       card.classList.add("flipped");
       flipped.push(card);
@@ -67,20 +71,24 @@ var images = [
         var card2 = flipped[1];
         var index1 = card1.dataset.index;
         var index2 = card2.dataset.index;
+        var image1 = images[index1];
+        var image2 = images[index2];
   
-        if (images[index1] === images[index2]) {
+        if (image1 === image2) {
           card1.removeEventListener("click", flipCard);
           card2.removeEventListener("click", flipCard);
           flipped = [];
           matchedPairs++;
   
           if (matchedPairs === numCards / 2) {
-            setTimeout(function() {
-              alert("Gefeliciteerd! Je hebt het spel gewonnen!");
+            setTimeout(function () {
+              alert("Gefeliciteerd! Je hebt gewonnen!");
+              score++;
+              scoreElement.textContent = "Score: " + score;
             }, 500);
           }
         } else {
-          setTimeout(function() {
+          setTimeout(function () {
             card1.classList.remove("flipped");
             card2.classList.remove("flipped");
             flipped = [];
@@ -95,17 +103,14 @@ var images = [
       gridContainer.firstChild.remove();
     }
   
-
     flippedCards = 0;
     matchedPairs = 0;
   
     createCards();
   
-  
-    scoreElement.textContent = "Score: " + restarts;
   }
   
-  function shuffleArray(array) {
+function shuffleArray(array) {
     var currentIndex = array.length;
     var temporaryValue, randomIndex;
   
@@ -117,4 +122,4 @@ var images = [
       array[randomIndex] = temporaryValue;
     }
     return array;
-  }
+}
