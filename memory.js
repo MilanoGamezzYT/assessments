@@ -1,25 +1,120 @@
+var images = [
+    "pictures/Verstappen.png",
+    "pictures/Leclerc.png",
+    "pictures/Alonso.png",
+    "pictures/Russell.png",
+    "pictures/Norris.png",
+    "pictures/Hulkenberg.png",
+    "pictures/Bottas.png",
+    "pictures/Albon.png",
+    "pictures/Gasly.png",
+    "pictures/Devries.png"
+  ];
+  
+  var numCards = 10;
+  
+  var flippedCards = 0;
+  
+  var matchedPairs = 0;
+  
+  var restarts = 0;
+  
+  var gridContainer = document.querySelector(".grid-container");
+  
+  var scoreElement = document.querySelector(".score");
+  
+  var flipped = [];
+  
+  var restartButton = document.querySelector("button");
+  
+  restartButton.addEventListener("click", restart);
+  
+  createCards();
+  
+  function createCards() {
+    images = shuffleArray(images);
+  
+    for (var i = 0; i < numCards; i++) {
+      var card = document.createElement("div");
+      card.className = "card";
+      card.dataset.index = i;
+      card.addEventListener("click", flipCard);
+  
+      var front = document.createElement("div");
+      front.className = "front";
+      var frontImage = document.createElement("img");
+      frontImage.className = "front-image";
+      frontImage.src = images[i];
+      front.appendChild(frontImage);
+  
+      var back = document.createElement("div");
+      back.className = "back";
+  
+      card.appendChild(front);
+      card.appendChild(back);
+      gridContainer.appendChild(card);
+    }
+  }
+  
+  function flipCard(event) {
+    var card = event.target;
+    if (!card.classList.contains("flipped") && flipped.length < 2) {
+      card.classList.add("flipped");
+      flipped.push(card);
+  
+      if (flipped.length === 2) {
+        var card1 = flipped[0];
+        var card2 = flipped[1];
+        var index1 = card1.dataset.index;
+        var index2 = card2.dataset.index;
+  
+        if (images[index1] === images[index2]) {
+          card1.removeEventListener("click", flipCard);
+          card2.removeEventListener("click", flipCard);
+          flipped = [];
+          matchedPairs++;
+  
+          if (matchedPairs === numCards / 2) {
+            setTimeout(function() {
+              alert("Gefeliciteerd! Je hebt het spel gewonnen!");
+            }, 500);
+          }
+        } else {
+          setTimeout(function() {
+            card1.classList.remove("flipped");
+            card2.classList.remove("flipped");
+            flipped = [];
+          }, 1000);
+        }
+      }
+    }
+  }
+  
+  function restart() {
+    while (gridContainer.firstChild) {
+      gridContainer.firstChild.remove();
+    }
+  
 
-
-
-
-
-
-
-
-
-
-
-coureurs = ['Max verstappen','Lewis Hamilton','Lando Norris','Alex Albon','Nyck de Vries','Nico Hulkenberg','Charles Leclerc','Fernando Alonso','Valtteri Bottas','Piere Gasly'];
-coureurs = shuffle(coureurs);
-function shuffle(array){
-    let currentIndex = array.length, randomIndex;
-
-    while (currentIndex != 0) {
-
-    randomIndex = Math. floor (Math. random() * currentIndex);
-    currentIndex--;
-
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    flippedCards = 0;
+    matchedPairs = 0;
+  
+    createCards();
+  
+  
+    scoreElement.textContent = "Score: " + restarts;
+  }
+  
+  function shuffleArray(array) {
+    var currentIndex = array.length;
+    var temporaryValue, randomIndex;
+  
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
     }
     return array;
-}
+  }
