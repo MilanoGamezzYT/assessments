@@ -1,4 +1,3 @@
-import math
 EASY_TEXT = """Ik hou van programmeren. Programmeren is leuk. 
 Ik kan veel dingen maken met programmeren. Ik kan een website maken. 
 Ik kan een spel maken. Ik kan een chatbot maken. 
@@ -34,8 +33,8 @@ def getFileContentAsString(textFile: str) -> str:
 # opdracht 1
 def getNumberOfCharacters(text: str) -> int:
     teller = 0
-    for characters in text:
-        if characters in ALLOWED_IN_WORD:
+    for letter in text:
+        if letter in ALLOWED_IN_WORD:
             teller += 1
     return teller
 
@@ -43,25 +42,24 @@ def getNumberOfCharacters(text: str) -> int:
 # opdracht 2
 def getNumberOfSentences(text: str) -> int:
     teller1 = 0
-    for sentences in text:
-        if sentences == '.' or sentences == '?' or sentences == '!':
+    for letter in text:
+        if letter == '.' or letter == '?' or letter == '!':
             teller1 += 1
     return teller1
 
 # opdracht 3
 def getNumberOfWords(text: str) -> int:
     teller2 = 0
-    for words in text:
-        if words == ' ':
+    for letter in text:
+        if letter == ' ':
             teller2 += 1
     return teller2 + 1
 
 # opdracht 5
 def getAverageAVI(text: str ) -> int:
-    words = getNumberOfWords(text)
-    sentences = getNumberOfSentences(text)
-
-    gemiddelde = round(words / sentences)
+    amount_words = getNumberOfWords(text)
+    amount_sentences = getNumberOfSentences(text)
+    gemiddelde = round(amount_words / amount_sentences)
 
     if gemiddelde <= 7:
         AVIScore = 5
