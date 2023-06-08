@@ -1,44 +1,44 @@
 var images = [
-    "pictures/Verstappen.png",
-    "pictures/Leclerc.png",
-    "pictures/Alonso.png",
-    "pictures/Russell.png",
-    "pictures/Norris.png",
-    "pictures/Hulkenberg.png",
-    "pictures/Bottas.png",
-    "pictures/Albon.png",
-    "pictures/Gasly.png",
-    "pictures/Devries.png"
-  ];
+  "pictures/Verstappen.png",
+  "pictures/Leclerc.png",
+  "pictures/Alonso.png",
+  "pictures/Russell.png",
+  "pictures/Norris.png",
+  "pictures/Hulkenberg.png",
+  "pictures/Bottas.png",
+  "pictures/Albon.png",
+  "pictures/Gasly.png",
+  "pictures/Devries.png"
+];
   
-  images = images.concat(images);
+images = images.concat(images);
   
-  var numCards = 20;
+var numCards = 20;
   
-  var flippedCards = 0;
+var flippedCards = 0;
   
-  var matchedPairs = 0;
+var matchedPairs = 0;
   
-  var restarts = 0;
+var restarts = 0;
   
-  var gridContainer = document.querySelector(".grid-container");
+var gridContainer = document.querySelector(".grid-container");
   
-  var scoreElement = document.querySelector(".score");
+var scoreElement = document.querySelector(".score");
   
-  var flipped = [];
+var flipped = [];
   
-  var restartButton = document.querySelector("button");
+var restartButton = document.querySelector("button");
   
-  restartButton.addEventListener("click", restart);
+restartButton.addEventListener("click", restart);
   
-  createCards();
+createCards();
   
-  var score = 0;
+var score = 0;
   
-  function createCards() {
-    images = shuffleArray(images);
+function createCards() {
+  images = shuffleArray(images);
   
-    for (var i = 0; i < numCards; i++) {
+  for (var i = 0; i < numCards; i++) {
       var card = document.createElement("div");
       card.className = "card";
       card.dataset.index = i;
@@ -57,12 +57,12 @@ var images = [
       card.appendChild(front);
       card.appendChild(back);
       gridContainer.appendChild(card);
-    }
   }
+}
   
-  function flipCard(event) {
-    var card = event.target.parentElement;
-    if (!card.classList.contains("flipped") && flipped.length < 2) {
+function flipCard(event) {
+  var card = event.target.parentElement;
+  if (!card.classList.contains("flipped") && flipped.length < 2) {
       card.classList.add("flipped");
       flipped.push(card);
   
@@ -93,12 +93,12 @@ var images = [
             card2.classList.remove("flipped");
             flipped = [];
           }, 1000);
-        }
       }
     }
   }
+}
   
-  function restart() {
+function restart() {
     while (gridContainer.firstChild) {
       gridContainer.firstChild.remove();
     }
@@ -108,7 +108,7 @@ var images = [
   
     createCards();
   
-  }
+}
   
 function shuffleArray(array) {
     var currentIndex = array.length;
